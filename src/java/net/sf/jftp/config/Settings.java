@@ -32,7 +32,7 @@ public class Settings
                                                   ".jftp/jftp.properties".replace('/',
                                                                                   File.separatorChar);
 
-    public static boolean IS_JAVA_1_6 = true;
+    public static boolean IS_JAVA_1_6 = false;
     
 
     public static String sshHostKeyVerificationFile = System.getProperty("user.home") +

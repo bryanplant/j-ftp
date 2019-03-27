@@ -80,67 +80,11 @@ import net.sf.jftp.system.logging.Log;
 import net.sf.jftp.util.ZipFileCreator;
 
 
-public class LocalDir extends DirComponent implements ListSelectionListener,
+public class LocalDir extends DirGUI implements ListSelectionListener,
                                                   ActionListener,
                                                   ConnectionListener,
                                                   KeyListener
 {
-    static final String deleteString = "rm";
-    static final String mkdirString = "mkdir";
-    static final String refreshString = "fresh";
-    static final String cdString = "cd";
-    static final String cmdString = "cmd";
-    static final String downloadString = "<-";
-    static final String uploadString = "->";
-    static final String zipString = "zip";
-    static final String cpString = "cp";
-    static final String rnString = "rn";
-    static final String cdUpString = "cdUp";
-    HImageButton deleteButton;
-    HImageButton mkdirButton;
-    HImageButton cmdButton;
-    HImageButton refreshButton;
-    HImageButton cdButton;
-    HImageButton uploadButton;
-    HImageButton zipButton;
-    HImageButton cpButton;
-    HImageButton rnButton;
-    private DirCanvas label = new DirCanvas(this);
-    private boolean pathChanged = true;
-    private boolean firstGui = true;
-    private int pos = 0;
-    private JPanel p = new JPanel();
-    private JToolBar buttonPanel = new JToolBar()
-    {
-        public Insets getInsets()
-        {
-            return new Insets(0, 0, 0, 0);
-        }
-    };
-
-    private JToolBar currDirPanel = new JToolBar()
-    {
-        public Insets getInsets()
-        {
-            return new Insets(0, 0, 0, 0);
-        }
-    };
-
-    private DefaultListModel jlm;
-    private JScrollPane jsp = new JScrollPane(jl);
-    private int tmpindex = -1;
-    private Hashtable dummy = new Hashtable();
-    private JPopupMenu popupMenu = new JPopupMenu();
-    private JMenuItem runFile = new JMenuItem("Launch file");
-    private JMenuItem viewFile = new JMenuItem("View file");
-    private JMenuItem props = new JMenuItem("Properties");
-    private DirEntry currentPopup = null;
-    private String sortMode = null;
-    String[] sortTypes = new String[] { "Normal", "Reverse", "Size", "Size/Re" };
-    private JComboBox sorter = new JComboBox(sortTypes);
-    HImageButton cdUpButton;
-    private boolean dateEnabled = false;
-
     /**
     * LocalDir constructor.
     */
@@ -170,41 +114,12 @@ public class LocalDir extends DirComponent implements ListSelectionListener,
     */
     public void gui_init()
     {
-        setLayout(new BorderLayout());
-        currDirPanel.setFloatable(false);
-        buttonPanel.setFloatable(false);
-
-        FlowLayout f = new FlowLayout(FlowLayout.RIGHT);
-        f.setHgap(1);
-        f.setVgap(2);
-
-        buttonPanel.setLayout(f);
-        buttonPanel.setMargin(new Insets(0, 0, 0, 0));
+        super.gui_init(new FlowLayout(FlowLayout.RIGHT));
 
         runFile.addActionListener(this);
         viewFile.addActionListener(this);
-        props.addActionListener(this);
         popupMenu.add(runFile);
         popupMenu.add(viewFile);
-        popupMenu.add(props);
-
-        deleteButton = new HImageButton(Settings.deleteImage, deleteString,
-                                        "Delete selected", this);
-        deleteButton.setToolTipText("Delete selected");
-
-        mkdirButton = new HImageButton(Settings.mkdirImage, mkdirString,
-                                       "Create a new directory", this);
-        mkdirButton.setToolTipText("Create directory");
-
-        refreshButton = new HImageButton(Settings.refreshImage, refreshString,
-                                         "Refresh current directory", this);
-        refreshButton.setToolTipText("Refresh directory");    
-		refreshButton.setRolloverIcon(new ImageIcon(HImage.getImage(this, Settings.refreshImage2)));
-		refreshButton.setRolloverEnabled(true);
-
-        cdButton = new HImageButton(Settings.cdImage, cdString,
-                                    "Change directory", this);
-        cdButton.setToolTipText("Change directory");
 
         uploadButton = new HImageButton(Settings.uploadImage, uploadString,
                                         "Upload selected", this);
@@ -229,13 +144,6 @@ public class LocalDir extends DirComponent implements ListSelectionListener,
         cdUpButton.setToolTipText("Go to Parent Directory");
 
         label.setText("Filesystem: " + StringUtils.cutPath(path));
-        label.setSize(getSize().width - 10, 24);
-        currDirPanel.add(label);
-        currDirPanel.setSize(getSize().width - 10, 32);
-        label.setSize(getSize().width - 20, 24);
-
-        p.setLayout(new BorderLayout());
-        p.add("North", currDirPanel);
 
         buttonPanel.add(sorter);
 
@@ -387,7 +295,7 @@ public class LocalDir extends DirComponent implements ListSelectionListener,
         jsp.setVisible(true);
         
         TableUtils.tryToEnableRowSorting(table);
-        
+
         if(Settings.IS_JAVA_1_6) {
         	//sorter.setVisible(false);
         	buttonPanel.remove(sorter);

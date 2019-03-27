@@ -75,67 +75,10 @@ import net.sf.jftp.system.logging.Log;
 import net.sf.jftp.tools.Shell;
 
 
-public class RemoteDir extends DirComponent implements ListSelectionListener,
+public class RemoteDir extends DirGUI implements ListSelectionListener,
         ActionListener,
         ConnectionListener,
         KeyListener {
-    //HImageButton openButton;
-    static final String deleteString = "rm";
-    static final String mkdirString = "mkdir";
-    static final String refreshString = "fresh";
-    static final String cdString = "cd";
-    static final String cmdString = "cmd";
-    static final String downloadString = "<-";
-    static final String uploadString = "->";
-    static final String queueString = "que";
-    static final String cdUpString = "cdUp";
-    static final String rnString = "rn";
-    HImageButton deleteButton;
-    HImageButton mkdirButton;
-    HImageButton cmdButton;
-    HImageButton refreshButton;
-    HImageButton cdButton;
-    HImageButton uploadButton;
-    HImageButton downloadButton;
-    HImageButton queueButton;
-    HImageButton cdUpButton;
-    HImageButton rnButton;
-
-    //static final String openString = "open";
-    private DirCanvas label = new DirCanvas(this);
-    private boolean pathChanged = true;
-    private boolean firstGui = true;
-    private int pos = 0;
-    private JPanel p = new JPanel();
-    private JToolBar buttonPanel = new JToolBar() {
-        public Insets getInsets() {
-            return new Insets(0, 0, 0, 0);
-        }
-    };
-
-    //private JPanel buttonPanel = new JPanel();
-    private JToolBar currDirPanel = new JToolBar() {
-        public Insets getInsets() {
-            return new Insets(0, 0, 0, 0);
-        }
-    };
-
-    private DefaultListModel jlm;
-    private JScrollPane jsp = new JScrollPane(jl);
-    private int tmpindex = -1;
-    private HImageButton list = new HImageButton(Settings.listImage, "list",
-            "Show remote listing...", this);
-    private HImageButton transferType = new HImageButton(Settings.typeImage,
-            "type",
-            "Toggle transfer type...",
-            this);
-    private JPopupMenu popupMenu = new JPopupMenu();
-    private JMenuItem props = new JMenuItem("Properties");
-    private DirEntry currentPopup = null;
-    private String sortMode = null;
-    String[] sortTypes = new String[]{"Normal", "Reverse", "Size", "Size/Re"};
-    private JComboBox sorter = new JComboBox(sortTypes);
-    private boolean dateEnabled = false;
 
     /**
      * RemoteDir constructor.
@@ -165,23 +108,15 @@ public class RemoteDir extends DirComponent implements ListSelectionListener,
         setDate();
     }
 
+    public void initButtons() {
+
+    }
+
     /**
      * Creates the gui and adds the MouseListener etc.
      */
     public void gui_init() {
-        setLayout(new BorderLayout());
-        currDirPanel.setFloatable(false);
-        buttonPanel.setFloatable(false);
-
-        FlowLayout f = new FlowLayout(FlowLayout.LEFT);
-        f.setHgap(1);
-        f.setVgap(2);
-
-        buttonPanel.setLayout(f);
-        buttonPanel.setMargin(new Insets(0, 0, 0, 0));
-
-        props.addActionListener(this);
-        popupMenu.add(props);
+        super.gui_init(new FlowLayout(FlowLayout.LEFT));
 
         rnButton = new HImageButton(Settings.textFileImage, rnString,
                 "Rename selected file or directory", this);
@@ -189,24 +124,6 @@ public class RemoteDir extends DirComponent implements ListSelectionListener,
 
         list.setToolTipText("Show remote listing...");
         transferType.setToolTipText("Toggle transfer type...");
-
-        deleteButton = new HImageButton(Settings.deleteImage, deleteString,
-                "Delete  selected", this);
-        deleteButton.setToolTipText("Delete selected");
-
-        mkdirButton = new HImageButton(Settings.mkdirImage, mkdirString,
-                "Create a new directory", this);
-        mkdirButton.setToolTipText("Create directory");
-
-        refreshButton = new HImageButton(Settings.refreshImage, refreshString,
-                "Refresh current directory", this);
-        refreshButton.setToolTipText("Refresh directory");
-        refreshButton.setRolloverIcon(new ImageIcon(HImage.getImage(this, Settings.refreshImage2)));
-        refreshButton.setRolloverEnabled(true);
-
-        cdButton = new HImageButton(Settings.cdImage, cdString,
-                "Change directory", this);
-        cdButton.setToolTipText("Change directory");
 
         cmdButton = new HImageButton(Settings.cmdImage, cmdString,
                 "Execute remote command", this);
@@ -228,13 +145,6 @@ public class RemoteDir extends DirComponent implements ListSelectionListener,
         //openButton = new HImageButton(Settings.openImage,openString,"Connect to server",this);
         //openButton.setToolTipText("Connect");   
         setLabel();
-        label.setSize(getSize().width - 10, 24);
-        currDirPanel.add(label);
-        currDirPanel.setSize(getSize().width - 10, 32);
-        label.setSize(getSize().width - 20, 24);
-
-        p.setLayout(new BorderLayout());
-        p.add("North", currDirPanel);
 
         buttonPanel.add(new JLabel("           "));
         buttonPanel.add(queueButton);
