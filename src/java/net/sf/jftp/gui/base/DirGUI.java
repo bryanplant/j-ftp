@@ -86,6 +86,16 @@ public class DirGUI extends DirComponent implements ActionListener {
         props.addActionListener(this);
         popupMenu.add(props);
 
+        label.setSize(getSize().width - 10, 24);
+        currDirPanel.add(label);
+        currDirPanel.setSize(getSize().width - 10, 32);
+        label.setSize(getSize().width - 20, 24);
+
+        p.setLayout(new BorderLayout());
+        p.add("North", currDirPanel);
+    }
+
+    public void initButtons() {
         deleteButton = new HImageButton(Settings.deleteImage, deleteString,
                 "Delete selected", this);
         deleteButton.setToolTipText("Delete selected");
@@ -103,22 +113,23 @@ public class DirGUI extends DirComponent implements ActionListener {
         cdButton = new HImageButton(Settings.cdImage, cdString,
                 "Change directory", this);
         cdButton.setToolTipText("Change directory");
-
-        label.setSize(getSize().width - 10, 24);
-        currDirPanel.add(label);
-        currDirPanel.setSize(getSize().width - 10, 32);
-        label.setSize(getSize().width - 20, 24);
-
-        p.setLayout(new BorderLayout());
-        p.add("North", currDirPanel);
     }
 
-    public void initButtons() {
+    public void initButtonPanel() {
 
     }
 
     public void addCommonButtons() {
+        buttonPanel.add(refreshButton);
+        buttonPanel.add(new JLabel("  "));
 
+        buttonPanel.add(rnButton);
+        buttonPanel.add(mkdirButton);
+
+        buttonPanel.add(cdButton);
+        buttonPanel.add(deleteButton);
+        buttonPanel.add(cdUpButton);
+        buttonPanel.add(new JLabel("  "));
     }
 
     @Override
