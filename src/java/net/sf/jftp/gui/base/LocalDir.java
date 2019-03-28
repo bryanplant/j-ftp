@@ -144,64 +144,11 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
         // add this becaus we need to fetch only doubleclicks
         MouseListener mouseListener = new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                if (JFtp.uiBlocked) {
-                    return;
-                }
-
-                if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
-                    int index = jl.getSelectedIndex() - 1;
-
-                    if (index < -1) {
-                        return;
-                    }
-
-                    String tgt = (String) jl.getSelectedValue().toString();
-
-                    if (index < 0) {
-                    } else if ((dirEntry == null) || (dirEntry.length < index) ||
-                            (dirEntry[index] == null)) {
-                        return;
-                    } else {
-                        currentPopup = dirEntry[index];
-                        popupMenu.show(e.getComponent(), e.getX(), e.getY());
-                    }
-                }
+                LocalDir.this.mousePressed(e);
             }
 
             public void mouseClicked(MouseEvent e) {
-                if (JFtp.uiBlocked) {
-                    return;
-                }
-
-                TableUtils.copyTableSelectionsToJList(jl, table);
-
-                //System.out.println("DirEntryListener::");
-                if (e.getClickCount() == 2) {
-                    //System.out.println("2xList selection: "+jl.getSelectedValue().toString());
-                    int index = jl.getSelectedIndex() - 1;
-
-                    // mousewheel bugfix, ui refresh bugfix
-                    if (index < -1) {
-                        return;
-                    }
-
-                    String tgt = (String) jl.getSelectedValue().toString();
-
-                    //System.out.println("List selection: "+index);
-                    if (index < 0) {
-                        doChdir(path + tgt);
-                    } else if ((dirEntry == null) || (dirEntry.length < index) ||
-                            (dirEntry[index] == null)) {
-                        return;
-                    } else if (dirEntry[index].isDirectory()) {
-                        doChdir(path + tgt);
-                    } else {
-                        showContentWindow(path + dirEntry[index].toString(),
-                                dirEntry[index]);
-
-                        //blockedTransfer(index);
-                    }
-                }
+                LocalDir.this.mouseClicked(e);
             }
         };
 
@@ -270,13 +217,6 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
         buttonPanel.setVisible(true);
         buttonPanel.setSize(getSize().width - 10, 32);
         sorter.addActionListener(this);
-    }
-
-    public void doChdir(String path) {
-
-        JFtp.setAppCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        con.chdir(path);
-        JFtp.setAppCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 
     public void setViewPort() {
@@ -1087,6 +1027,7 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
     /**
      * Mime type handler for doubleclicks on files
      */
+    @Override
     public void showContentWindow(String url, DirEntry d) {
         //------- popup -> run
         if (Settings.runtimeCommands > 0 && url.startsWith("popup-run@")) {
