@@ -104,15 +104,10 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
      * Creates the gui and adds the MouseListener etc.
      */
     public void gui_init() {
-        props.addActionListener(this);
-        popupMenu.add(props);
-
         initButtons();
-        initPanels(FlowLayout.LEFT, "West", downloadButton);
+        initComponents(FlowLayout.LEFT, "West", downloadButton);
         addButtons();
         initMouseListener();
-
-        sorter.addActionListener(this);
 
         jlm = new DefaultListModel();
         jl = new JList(jlm);
@@ -163,6 +158,7 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
         buttonPanel.add(list);
         buttonPanel.add(transferType);
         buttonPanel.add(sorter);
+        sorter.addActionListener(this);
 
         if (Settings.IS_JAVA_1_6) {
             buttonPanel.remove(sorter);

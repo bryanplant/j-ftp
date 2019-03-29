@@ -96,19 +96,10 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
      * Creates the gui and adds the MouseListener etc.
      */
     public void gui_init() {
-        runFile.addActionListener(this);
-        viewFile.addActionListener(this);
-        props.addActionListener(this);
-        popupMenu.add(runFile);
-        popupMenu.add(viewFile);
-        popupMenu.add(props);
-
         initButtons();
-        initPanels(FlowLayout.RIGHT, "East", uploadButton);
+        initComponents(FlowLayout.RIGHT, "East", uploadButton);
         addButtons();
         initMouseListener();
-
-        sorter.addActionListener(this);
 
         setDirList(true);
         jlm = new DefaultListModel();
@@ -145,6 +136,7 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
 
     public void addButtons() {
         buttonPanel.add(sorter);
+        sorter.addActionListener(this);
         buttonPanel.add(new JLabel("  "));
         buttonPanel.add(refreshButton);
         buttonPanel.add(new JLabel("  "));
@@ -160,8 +152,17 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
         }
     }
 
-    public void doChdir(String path) {
+    public void initComponents(int flowLayoutDirection, String secondDirection, HImageButton button) {
+        super.initComponents(flowLayoutDirection, secondDirection, button);
 
+        runFile.addActionListener(this);
+        viewFile.addActionListener(this);
+        popupMenu.add(runFile);
+        popupMenu.add(viewFile);
+
+    }
+
+    public void doChdir(String path) {
         JFtp.setAppCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         con.chdir(path);
         JFtp.setAppCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));

@@ -119,7 +119,10 @@ public class DirGUI extends DirComponent implements ActionListener {
         table.addMouseListener(mouseListener);
     }
 
-    public void initPanels(int flowLayoutDirection, String secondDirection, HImageButton button) {
+    public void initComponents(int flowLayoutDirection, String secondDirection, HImageButton button) {
+        props.addActionListener(this);
+        popupMenu.add(props);
+
         buttonPanel = new JToolBar() {
             public Insets getInsets() {
                 return new Insets(0, 0, 0, 0);
