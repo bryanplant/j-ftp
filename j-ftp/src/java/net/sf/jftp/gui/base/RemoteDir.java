@@ -32,7 +32,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -41,7 +40,6 @@ import javax.swing.event.ListSelectionListener;
 import net.sf.jftp.JFtp;
 import net.sf.jftp.config.SaveSet;
 import net.sf.jftp.config.Settings;
-import net.sf.jftp.gui.base.dir.DirCellRenderer;
 import net.sf.jftp.gui.base.dir.DirEntry;
 import net.sf.jftp.gui.base.dir.DirLister;
 import net.sf.jftp.gui.base.dir.DirPanel;
@@ -108,13 +106,7 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
         initComponents(FlowLayout.LEFT, "West", downloadButton);
         addButtons();
         initMouseListener();
-
-        jlm = new DefaultListModel();
-        jl = new JList(jlm);
-        jl.setCellRenderer(new DirCellRenderer());
-        jl.setVisibleRowCount(Settings.visibleFileRows);
-        jl.setDragEnabled(true);
-        jl.setDropTarget(JFtp.statusP.jftp.dropTarget);
+        initList();
 
         TableUtils.tryToEnableRowSorting(table);
         setVisible(true);
@@ -163,6 +155,12 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
         if (Settings.IS_JAVA_1_6) {
             buttonPanel.remove(sorter);
         }
+    }
+
+    public void initList() {
+        super.initList();
+        jl.setDragEnabled(true);
+        jl.setDropTarget(JFtp.dropTarget);
     }
 
     @Override

@@ -2,10 +2,7 @@ package net.sf.jftp.gui.base;
 
 import net.sf.jftp.JFtp;
 import net.sf.jftp.config.Settings;
-import net.sf.jftp.gui.base.dir.DirCanvas;
-import net.sf.jftp.gui.base.dir.DirComponent;
-import net.sf.jftp.gui.base.dir.DirEntry;
-import net.sf.jftp.gui.base.dir.TableUtils;
+import net.sf.jftp.gui.base.dir.*;
 import net.sf.jftp.gui.framework.HImage;
 import net.sf.jftp.gui.framework.HImageButton;
 
@@ -119,6 +116,16 @@ public class DirGUI extends DirComponent implements ActionListener {
         table.addMouseListener(mouseListener);
     }
 
+    public void addButtons() {
+        buttonPanel.add(rnButton);
+        buttonPanel.add(mkdirButton);
+
+        buttonPanel.add(cdButton);
+        buttonPanel.add(deleteButton);
+        buttonPanel.add(cdUpButton);
+        buttonPanel.add(new JLabel("  "));
+    }
+
     public void initComponents(int flowLayoutDirection, String secondDirection, HImageButton button) {
         props.addActionListener(this);
         popupMenu.add(props);
@@ -170,14 +177,13 @@ public class DirGUI extends DirComponent implements ActionListener {
         jsp.setVisible(true);
     }
 
-    public void addButtons() {
-        buttonPanel.add(rnButton);
-        buttonPanel.add(mkdirButton);
+    public void initList() {
+        jlm = new DefaultListModel();
+        jl = new JList(jlm);
+        jl.setCellRenderer(new DirCellRenderer());
+        jl.setVisibleRowCount(Settings.visibleFileRows);
 
-        buttonPanel.add(cdButton);
-        buttonPanel.add(deleteButton);
-        buttonPanel.add(cdUpButton);
-        buttonPanel.add(new JLabel("  "));
+        TableUtils.tryToEnableRowSorting(table);
     }
 
     public void mousePressed(MouseEvent e) {

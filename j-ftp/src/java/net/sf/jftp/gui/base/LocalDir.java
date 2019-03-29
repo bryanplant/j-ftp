@@ -35,7 +35,6 @@ import java.util.zip.ZipFile;
 import javax.swing.DefaultListModel;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionListener;
@@ -43,11 +42,9 @@ import javax.swing.event.ListSelectionListener;
 import net.sf.jftp.JFtp;
 import net.sf.jftp.config.SaveSet;
 import net.sf.jftp.config.Settings;
-import net.sf.jftp.gui.base.dir.DirCellRenderer;
 import net.sf.jftp.gui.base.dir.DirEntry;
 import net.sf.jftp.gui.base.dir.DirLister;
 import net.sf.jftp.gui.base.dir.DirPanel;
-import net.sf.jftp.gui.base.dir.TableUtils;
 import net.sf.jftp.gui.framework.HImageButton;
 import net.sf.jftp.gui.framework.HPanel;
 import net.sf.jftp.gui.tasks.Creator;
@@ -100,14 +97,9 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
         initComponents(FlowLayout.RIGHT, "East", uploadButton);
         addButtons();
         initMouseListener();
+        initList();
 
         setDirList(true);
-        jlm = new DefaultListModel();
-        jl = new JList(jlm);
-        jl.setCellRenderer(new DirCellRenderer());
-        jl.setVisibleRowCount(Settings.visibleFileRows);
-
-        TableUtils.tryToEnableRowSorting(table);
         setVisible(true);
     }
 
