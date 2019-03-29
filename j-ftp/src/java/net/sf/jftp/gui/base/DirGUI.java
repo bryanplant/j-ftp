@@ -6,6 +6,7 @@ import net.sf.jftp.gui.base.dir.DirCanvas;
 import net.sf.jftp.gui.base.dir.DirComponent;
 import net.sf.jftp.gui.base.dir.DirEntry;
 import net.sf.jftp.gui.base.dir.TableUtils;
+import net.sf.jftp.gui.framework.HImage;
 import net.sf.jftp.gui.framework.HImageButton;
 
 import javax.swing.*;
@@ -49,11 +50,7 @@ public class DirGUI extends DirComponent implements ActionListener {
     boolean pathChanged = true;
     boolean firstGui = true;
     JPanel p = new JPanel();
-    JToolBar buttonPanel = new JToolBar() {
-        public Insets getInsets() {
-            return new Insets(0, 0, 0, 0);
-        }
-    };
+    JToolBar buttonPanel;
 
     JToolBar currDirPanel = new JToolBar() {
         public Insets getInsets() {
@@ -75,6 +72,39 @@ public class DirGUI extends DirComponent implements ActionListener {
     JComboBox sorter = new JComboBox(sortTypes);
     boolean dateEnabled = false;
 
+    public void initComponents() {
+        rnButton = new HImageButton(Settings.textFileImage, rnString,
+                "Rename selected file or directory", this);
+        rnButton.setToolTipText("Rename selected");
+
+        deleteButton = new HImageButton(Settings.deleteImage, deleteString,
+                "Delete selected", this);
+        deleteButton.setToolTipText("Delete selected");
+
+        mkdirButton = new HImageButton(Settings.mkdirImage, mkdirString,
+                "Create a new directory", this);
+        mkdirButton.setToolTipText("Create directory");
+
+        refreshButton = new HImageButton(Settings.refreshImage, refreshString,
+                "Refresh current directory", this);
+        refreshButton.setToolTipText("Refresh directory");
+        refreshButton.setRolloverIcon(new ImageIcon(HImage.getImage(this, Settings.refreshImage2)));
+        refreshButton.setRolloverEnabled(true);
+
+        cdButton = new HImageButton(Settings.cdImage, cdString,
+                "Change directory", this);
+        cdButton.setToolTipText("Change directory");
+
+        cdUpButton = new HImageButton(Settings.cdUpImage, cdUpString,
+                "Go to Parent Directory", this);
+        cdUpButton.setToolTipText("Go to Parent Directory");
+
+        label.setSize(getSize().width - 10, 24);
+        currDirPanel.add(label);
+        currDirPanel.setSize(getSize().width - 10, 32);
+        label.setSize(getSize().width - 20, 24);
+    }
+
     public void initMouseListener() {
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -87,6 +117,30 @@ public class DirGUI extends DirComponent implements ActionListener {
         };
 
         table.addMouseListener(mouseListener);
+    }
+
+    public void initButtonPanel(FlowLayout f) {
+        buttonPanel = new JToolBar() {
+            public Insets getInsets() {
+                return new Insets(0, 0, 0, 0);
+            }
+        };
+
+        buttonPanel.setFloatable(false);
+        buttonPanel.setLayout(f);
+        buttonPanel.setMargin(new Insets(0, 0, 0, 0));
+        buttonPanel.setVisible(true);
+        buttonPanel.setSize(getSize().width - 10, 32);
+    }
+
+    public void addButtons() {
+        buttonPanel.add(rnButton);
+        buttonPanel.add(mkdirButton);
+
+        buttonPanel.add(cdButton);
+        buttonPanel.add(deleteButton);
+        buttonPanel.add(cdUpButton);
+        buttonPanel.add(new JLabel("  "));
     }
 
     public void mousePressed(MouseEvent e) {

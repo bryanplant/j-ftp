@@ -113,14 +113,6 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
     public void gui_init() {
         setLayout(new BorderLayout());
         currDirPanel.setFloatable(false);
-        buttonPanel.setFloatable(false);
-
-        FlowLayout f = new FlowLayout(FlowLayout.RIGHT);
-        f.setHgap(1);
-        f.setVgap(2);
-
-        buttonPanel.setLayout(f);
-        buttonPanel.setMargin(new Insets(0, 0, 0, 0));
 
         runFile.addActionListener(this);
         viewFile.addActionListener(this);
@@ -129,80 +121,14 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
         popupMenu.add(viewFile);
         popupMenu.add(props);
 
-        deleteButton = new HImageButton(Settings.deleteImage, deleteString,
-                "Delete selected", this);
-        deleteButton.setToolTipText("Delete selected");
-
-        mkdirButton = new HImageButton(Settings.mkdirImage, mkdirString,
-                "Create a new directory", this);
-        mkdirButton.setToolTipText("Create directory");
-
-        refreshButton = new HImageButton(Settings.refreshImage, refreshString,
-                "Refresh current directory", this);
-        refreshButton.setToolTipText("Refresh directory");
-        refreshButton.setRolloverIcon(new ImageIcon(HImage.getImage(this, Settings.refreshImage2)));
-        refreshButton.setRolloverEnabled(true);
-
-        cdButton = new HImageButton(Settings.cdImage, cdString,
-                "Change directory", this);
-        cdButton.setToolTipText("Change directory");
-
-        uploadButton = new HImageButton(Settings.uploadImage, uploadString,
-                "Upload selected", this);
-        uploadButton.setToolTipText("Upload selected");
-        //uploadButton.setBackground(new Color(192,192,192));
-
-        zipButton = new HImageButton(Settings.zipFileImage, zipString,
-                "Add selected to new zip file", this);
-        zipButton.setToolTipText("Create zip");
-
-        cpButton = new HImageButton(Settings.copyImage, cpString,
-                "Copy selected files to another local dir",
-                this);
-        cpButton.setToolTipText("Local copy selected");
-
-        rnButton = new HImageButton(Settings.textFileImage, rnString,
-                "Rename selected file or directory", this);
-        rnButton.setToolTipText("Rename selected");
-
-        cdUpButton = new HImageButton(Settings.cdUpImage, cdUpString,
-                "Go to Parent Directory", this);
-        cdUpButton.setToolTipText("Go to Parent Directory");
-
-        label.setText("Filesystem: " + StringUtils.cutPath(path));
-        label.setSize(getSize().width - 10, 24);
-        currDirPanel.add(label);
-        currDirPanel.setSize(getSize().width - 10, 32);
-        label.setSize(getSize().width - 20, 24);
-
-        p.setLayout(new BorderLayout());
-        p.add("North", currDirPanel);
-
-        buttonPanel.add(sorter);
-
-        buttonPanel.add(new JLabel("  "));
-
-        buttonPanel.add(refreshButton);
-        buttonPanel.add(new JLabel("  "));
-
-        buttonPanel.add(cpButton);
-        buttonPanel.add(rnButton);
-        buttonPanel.add(mkdirButton);
-
-        buttonPanel.add(cdButton);
-        buttonPanel.add(deleteButton);
-        buttonPanel.add(cdUpButton);
-        buttonPanel.add(new JLabel("  "));
-
-        buttonPanel.add(zipButton);
-        buttonPanel.add(new JLabel("              "));
-
-        buttonPanel.setVisible(true);
-
-        buttonPanel.setSize(getSize().width - 10, 32);
+        initComponents();
+        initButtonPanel();
+        addButtons();
 
         sorter.addActionListener(this);
 
+        p.setLayout(new BorderLayout());
+        p.add("North", currDirPanel);
         p.add("South", buttonPanel);
 
         JPanel second = new JPanel();
@@ -250,6 +176,46 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
         }
 
         setVisible(true);
+    }
+
+    public void initComponents() {
+        super.initComponents();
+
+        uploadButton = new HImageButton(Settings.uploadImage, uploadString,
+                "Upload selected", this);
+        uploadButton.setToolTipText("Upload selected");
+
+        zipButton = new HImageButton(Settings.zipFileImage, zipString,
+                "Add selected to new zip file", this);
+        zipButton.setToolTipText("Create zip");
+
+        cpButton = new HImageButton(Settings.copyImage, cpString,
+                "Copy selected files to another local dir",
+                this);
+        cpButton.setToolTipText("Local copy selected");
+
+
+        label.setText("Filesystem: " + StringUtils.cutPath(path));
+    }
+
+    public void initButtonPanel() {
+        FlowLayout f = new FlowLayout(FlowLayout.RIGHT);
+        f.setHgap(1);
+        f.setVgap(2);
+        initButtonPanel(f);
+    }
+
+    public void addButtons() {
+        buttonPanel.add(sorter);
+        buttonPanel.add(new JLabel("  "));
+        buttonPanel.add(refreshButton);
+        buttonPanel.add(new JLabel("  "));
+        buttonPanel.add(cpButton);
+
+        super.addButtons();
+
+        buttonPanel.add(zipButton);
+        buttonPanel.add(new JLabel("              "));
     }
 
     public void doChdir(String path) {

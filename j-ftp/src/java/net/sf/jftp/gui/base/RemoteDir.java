@@ -115,98 +115,17 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
     public void gui_init() {
         setLayout(new BorderLayout());
         currDirPanel.setFloatable(false);
-        buttonPanel.setFloatable(false);
-
-        FlowLayout f = new FlowLayout(FlowLayout.LEFT);
-        f.setHgap(1);
-        f.setVgap(2);
-
-        buttonPanel.setLayout(f);
-        buttonPanel.setMargin(new Insets(0, 0, 0, 0));
 
         props.addActionListener(this);
         popupMenu.add(props);
 
-        rnButton = new HImageButton(Settings.textFileImage, rnString,
-                "Rename selected file or directory", this);
-        rnButton.setToolTipText("Rename selected");
+        initComponents();
 
-        list.setToolTipText("Show remote listing...");
-        transferType.setToolTipText("Toggle transfer type...");
-
-        deleteButton = new HImageButton(Settings.deleteImage, deleteString,
-                "Delete  selected", this);
-        deleteButton.setToolTipText("Delete selected");
-
-        mkdirButton = new HImageButton(Settings.mkdirImage, mkdirString,
-                "Create a new directory", this);
-        mkdirButton.setToolTipText("Create directory");
-
-        refreshButton = new HImageButton(Settings.refreshImage, refreshString,
-                "Refresh current directory", this);
-        refreshButton.setToolTipText("Refresh directory");
-        refreshButton.setRolloverIcon(new ImageIcon(HImage.getImage(this, Settings.refreshImage2)));
-        refreshButton.setRolloverEnabled(true);
-
-        cdButton = new HImageButton(Settings.cdImage, cdString,
-                "Change directory", this);
-        cdButton.setToolTipText("Change directory");
-
-        cmdButton = new HImageButton(Settings.cmdImage, cmdString,
-                "Execute remote command", this);
-        cmdButton.setToolTipText("Execute remote command");
-
-        downloadButton = new HImageButton(Settings.downloadImage,
-                downloadString, "Download selected",
-                this);
-        downloadButton.setToolTipText("Download selected");
-
-        queueButton = new HImageButton(Settings.queueImage, queueString,
-                "Queue selected", this);
-        queueButton.setToolTipText("Queue selected");
-
-        cdUpButton = new HImageButton(Settings.cdUpImage, cdUpString,
-                "Go to Parent Directory", this);
-        cdUpButton.setToolTipText("Go to Parent Directory");
-
-        //openButton = new HImageButton(Settings.openImage,openString,"Connect to server",this);
-        //openButton.setToolTipText("Connect");   
-        setLabel();
-        label.setSize(getSize().width - 10, 24);
-        currDirPanel.add(label);
-        currDirPanel.setSize(getSize().width - 10, 32);
-        label.setSize(getSize().width - 20, 24);
+        initButtonPanel();
+        addButtons();
 
         p.setLayout(new BorderLayout());
         p.add("North", currDirPanel);
-
-        buttonPanel.add(new JLabel("           "));
-        buttonPanel.add(queueButton);
-
-        buttonPanel.add(new JLabel("    "));
-
-        //buttonPanel.add(openButton);
-        //buttonPanel.add(new JLabel("   "));
-        buttonPanel.add(refreshButton);
-        buttonPanel.add(new JLabel("  "));
-        buttonPanel.add(rnButton);
-        buttonPanel.add(mkdirButton);
-        buttonPanel.add(cdButton);
-        buttonPanel.add(deleteButton);
-        buttonPanel.add(cdUpButton);
-        buttonPanel.add(new JLabel("  "));
-
-        buttonPanel.add(cmdButton);
-        buttonPanel.add(list);
-        buttonPanel.add(transferType);
-
-        //buttonPanel.add(new JLabel(" "));
-        buttonPanel.add(sorter);
-
-        buttonPanel.setVisible(true);
-
-        buttonPanel.setSize(getSize().width - 10, 32);
-
         p.add("South", buttonPanel);
 
         JPanel second = new JPanel();
@@ -221,7 +140,6 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
 
         sorter.addActionListener(this);
 
-        //setDirList(true);
         jlm = new DefaultListModel();
         jl = new JList(jlm);
         jl.setCellRenderer(new DirCellRenderer());
@@ -256,6 +174,50 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
         }
 
         setVisible(true);
+    }
+
+    public void initComponents() {
+        super.initComponents();
+
+        list.setToolTipText("Show remote listing...");
+        transferType.setToolTipText("Toggle transfer type...");
+
+        cmdButton = new HImageButton(Settings.cmdImage, cmdString,
+                "Execute remote command", this);
+        cmdButton.setToolTipText("Execute remote command");
+
+        downloadButton = new HImageButton(Settings.downloadImage,
+                downloadString, "Download selected",
+                this);
+        downloadButton.setToolTipText("Download selected");
+
+        queueButton = new HImageButton(Settings.queueImage, queueString,
+                "Queue selected", this);
+        queueButton.setToolTipText("Queue selected");
+
+        setLabel();
+    }
+
+    public void initButtonPanel() {
+        FlowLayout f = new FlowLayout(FlowLayout.LEFT);
+        f.setHgap(1);
+        f.setVgap(2);
+        initButtonPanel(f);
+    }
+
+    public void addButtons() {
+        buttonPanel.add(new JLabel("           "));
+        buttonPanel.add(queueButton);
+        buttonPanel.add(new JLabel("    "));
+        buttonPanel.add(refreshButton);
+        buttonPanel.add(new JLabel("  "));
+
+        super.addButtons();
+
+        buttonPanel.add(cmdButton);
+        buttonPanel.add(list);
+        buttonPanel.add(transferType);
+        buttonPanel.add(sorter);
     }
 
     @Override
