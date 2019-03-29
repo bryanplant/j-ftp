@@ -75,67 +75,11 @@ import net.sf.jftp.system.logging.Log;
 import net.sf.jftp.tools.Shell;
 
 
-public class RemoteDir extends DirComponent implements ListSelectionListener,
+public class RemoteDir extends DirGUI implements ListSelectionListener,
         ActionListener,
         ConnectionListener,
         KeyListener {
-    //HImageButton openButton;
-    static final String deleteString = "rm";
-    static final String mkdirString = "mkdir";
-    static final String refreshString = "fresh";
-    static final String cdString = "cd";
-    static final String cmdString = "cmd";
-    static final String downloadString = "<-";
-    static final String uploadString = "->";
-    static final String queueString = "que";
-    static final String cdUpString = "cdUp";
-    static final String rnString = "rn";
-    HImageButton deleteButton;
-    HImageButton mkdirButton;
-    HImageButton cmdButton;
-    HImageButton refreshButton;
-    HImageButton cdButton;
-    HImageButton uploadButton;
-    HImageButton downloadButton;
-    HImageButton queueButton;
-    HImageButton cdUpButton;
-    HImageButton rnButton;
 
-    //static final String openString = "open";
-    private DirCanvas label = new DirCanvas(this);
-    private boolean pathChanged = true;
-    private boolean firstGui = true;
-    private int pos = 0;
-    private JPanel p = new JPanel();
-    private JToolBar buttonPanel = new JToolBar() {
-        public Insets getInsets() {
-            return new Insets(0, 0, 0, 0);
-        }
-    };
-
-    //private JPanel buttonPanel = new JPanel();
-    private JToolBar currDirPanel = new JToolBar() {
-        public Insets getInsets() {
-            return new Insets(0, 0, 0, 0);
-        }
-    };
-
-    private DefaultListModel jlm;
-    private JScrollPane jsp = new JScrollPane(jl);
-    private int tmpindex = -1;
-    private HImageButton list = new HImageButton(Settings.listImage, "list",
-            "Show remote listing...", this);
-    private HImageButton transferType = new HImageButton(Settings.typeImage,
-            "type",
-            "Toggle transfer type...",
-            this);
-    private JPopupMenu popupMenu = new JPopupMenu();
-    private JMenuItem props = new JMenuItem("Properties");
-    private DirEntry currentPopup = null;
-    private String sortMode = null;
-    String[] sortTypes = new String[]{"Normal", "Reverse", "Size", "Size/Re"};
-    private JComboBox sorter = new JComboBox(sortTypes);
-    private boolean dateEnabled = false;
 
     /**
      * RemoteDir constructor.
