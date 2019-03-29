@@ -72,7 +72,7 @@ public class DirGUI extends DirComponent implements ActionListener {
     JComboBox sorter = new JComboBox(sortTypes);
     boolean dateEnabled = false;
 
-    public void initComponents() {
+    public void initButtons() {
         rnButton = new HImageButton(Settings.textFileImage, rnString,
                 "Rename selected file or directory", this);
         rnButton.setToolTipText("Rename selected");
@@ -146,8 +146,25 @@ public class DirGUI extends DirComponent implements ActionListener {
         second.setLayout(new BorderLayout());
         second.add("Center", p);
         second.add(secondDirection, button);
-
         add("North", second);
+
+        jsp = new JScrollPane(table);
+        table.getSelectionModel().addListSelectionListener(this);
+
+        AdjustmentListener adjustmentListener = new AdjustmentListener() {
+            public void adjustmentValueChanged(AdjustmentEvent e) {
+                jsp.repaint();
+                jsp.revalidate();
+            }
+        };
+
+        jsp.getHorizontalScrollBar().addAdjustmentListener(adjustmentListener);
+        jsp.getVerticalScrollBar().addAdjustmentListener(adjustmentListener);
+
+
+        jsp.setSize(getSize().width - 20, getSize().height - 72);
+        add("Center", jsp);
+        jsp.setVisible(true);
     }
 
     public void addButtons() {

@@ -34,7 +34,6 @@ import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.event.ListSelectionListener;
@@ -108,7 +107,7 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
         props.addActionListener(this);
         popupMenu.add(props);
 
-        initComponents();
+        initButtons();
         initPanels(FlowLayout.LEFT, "West", downloadButton);
         addButtons();
 
@@ -123,23 +122,6 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
 
         initMouseListener();
 
-        jsp = new JScrollPane(table);
-        table.getSelectionModel().addListSelectionListener(this);
-
-        AdjustmentListener adjustmentListener = new AdjustmentListener() {
-            public void adjustmentValueChanged(AdjustmentEvent e) {
-                jsp.repaint();
-                jsp.revalidate();
-            }
-        };
-
-        jsp.getHorizontalScrollBar().addAdjustmentListener(adjustmentListener);
-        jsp.getVerticalScrollBar().addAdjustmentListener(adjustmentListener);
-
-        jsp.setSize(getSize().width - 20, getSize().height - 72);
-        add("Center", jsp);
-        jsp.setVisible(true);
-
         TableUtils.tryToEnableRowSorting(table);
 
         if (Settings.IS_JAVA_1_6) {
@@ -150,8 +132,8 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
         setVisible(true);
     }
 
-    public void initComponents() {
-        super.initComponents();
+    public void initButtons() {
+        super.initButtons();
 
         list.setToolTipText("Show remote listing...");
         transferType.setToolTipText("Toggle transfer type...");
