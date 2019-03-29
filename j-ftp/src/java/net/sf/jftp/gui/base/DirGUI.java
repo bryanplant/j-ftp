@@ -119,18 +119,35 @@ public class DirGUI extends DirComponent implements ActionListener {
         table.addMouseListener(mouseListener);
     }
 
-    public void initButtonPanel(FlowLayout f) {
+    public void initPanels(int flowLayoutDirection, String secondDirection, HImageButton button) {
         buttonPanel = new JToolBar() {
             public Insets getInsets() {
                 return new Insets(0, 0, 0, 0);
             }
         };
 
+        FlowLayout f = new FlowLayout(flowLayoutDirection);
+        f.setHgap(1);
+        f.setVgap(2);
+
         buttonPanel.setFloatable(false);
         buttonPanel.setLayout(f);
         buttonPanel.setMargin(new Insets(0, 0, 0, 0));
         buttonPanel.setVisible(true);
         buttonPanel.setSize(getSize().width - 10, 32);
+
+        setLayout(new BorderLayout());
+        currDirPanel.setFloatable(false);
+        p.setLayout(new BorderLayout());
+        p.add("North", currDirPanel);
+        p.add("South", buttonPanel);
+
+        JPanel second = new JPanel();
+        second.setLayout(new BorderLayout());
+        second.add("Center", p);
+        second.add(secondDirection, button);
+
+        add("North", second);
     }
 
     public void addButtons() {

@@ -20,7 +20,6 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Insets;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,26 +30,19 @@ import java.util.Date;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JToolBar;
-import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionListener;
 
 import net.sf.jftp.JFtp;
 import net.sf.jftp.config.SaveSet;
 import net.sf.jftp.config.Settings;
-import net.sf.jftp.gui.base.dir.DirCanvas;
 import net.sf.jftp.gui.base.dir.DirCellRenderer;
-import net.sf.jftp.gui.base.dir.DirComponent;
 import net.sf.jftp.gui.base.dir.DirEntry;
 import net.sf.jftp.gui.base.dir.DirLister;
 import net.sf.jftp.gui.base.dir.DirPanel;
@@ -113,30 +105,12 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
      * Creates the gui and adds the MouseListener etc.
      */
     public void gui_init() {
-        setLayout(new BorderLayout());
-        currDirPanel.setFloatable(false);
-
         props.addActionListener(this);
         popupMenu.add(props);
 
         initComponents();
-
-        initButtonPanel();
+        initPanels(FlowLayout.LEFT, "West", downloadButton);
         addButtons();
-
-        p.setLayout(new BorderLayout());
-        p.add("North", currDirPanel);
-        p.add("South", buttonPanel);
-
-        JPanel second = new JPanel();
-        second.setLayout(new BorderLayout());
-        second.add("Center", p);
-        downloadButton.setMinimumSize(new Dimension(50, 50));
-        downloadButton.setPreferredSize(new Dimension(50, 50));
-        downloadButton.setMaximumSize(new Dimension(50, 50));
-        second.add("West", downloadButton);
-
-        add("North", second);
 
         sorter.addActionListener(this);
 
@@ -190,19 +164,15 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
                 downloadString, "Download selected",
                 this);
         downloadButton.setToolTipText("Download selected");
+        downloadButton.setMinimumSize(new Dimension(50, 50));
+        downloadButton.setPreferredSize(new Dimension(50, 50));
+        downloadButton.setMaximumSize(new Dimension(50, 50));
 
         queueButton = new HImageButton(Settings.queueImage, queueString,
                 "Queue selected", this);
         queueButton.setToolTipText("Queue selected");
 
         setLabel();
-    }
-
-    public void initButtonPanel() {
-        FlowLayout f = new FlowLayout(FlowLayout.LEFT);
-        f.setHgap(1);
-        f.setVgap(2);
-        initButtonPanel(f);
     }
 
     public void addButtons() {
