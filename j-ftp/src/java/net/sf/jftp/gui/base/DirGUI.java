@@ -24,6 +24,7 @@ public class DirGUI extends DirComponent implements ActionListener {
     static final String cpString = "cp";
     static final String cdUpString = "cdUp";
     static final String rnString = "rn";
+
     HImageButton deleteButton;
     HImageButton mkdirButton;
     HImageButton cmdButton;
@@ -36,6 +37,12 @@ public class DirGUI extends DirComponent implements ActionListener {
     HImageButton queueButton;
     HImageButton cdUpButton;
     HImageButton rnButton;
+    HImageButton list = new HImageButton(Settings.listImage, "list",
+            "Show remote listing...", this);
+    HImageButton transferType = new HImageButton(Settings.typeImage,
+            "type",
+            "Toggle transfer type...",
+            this);
 
     DirCanvas label = new DirCanvas(this);
     boolean pathChanged = true;
@@ -56,12 +63,7 @@ public class DirGUI extends DirComponent implements ActionListener {
     DefaultListModel jlm;
     JScrollPane jsp = new JScrollPane(jl);
     int tmpindex = -1;
-    HImageButton list = new HImageButton(Settings.listImage, "list",
-            "Show remote listing...", this);
-    HImageButton transferType = new HImageButton(Settings.typeImage,
-            "type",
-            "Toggle transfer type...",
-            this);
+
     JPopupMenu popupMenu = new JPopupMenu();
     JMenuItem runFile = new JMenuItem("Launch file");
     JMenuItem viewFile = new JMenuItem("View file");
