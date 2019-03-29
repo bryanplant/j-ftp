@@ -1,15 +1,16 @@
 package net.sf.jftp.gui.base;
 
+import net.sf.jftp.JFtp;
 import net.sf.jftp.config.Settings;
 import net.sf.jftp.gui.base.dir.DirCanvas;
 import net.sf.jftp.gui.base.dir.DirComponent;
 import net.sf.jftp.gui.base.dir.DirEntry;
+import net.sf.jftp.gui.base.dir.TableUtils;
 import net.sf.jftp.gui.framework.HImageButton;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class DirGUI extends DirComponent implements ActionListener {
     static final String deleteString = "rm";
@@ -73,6 +74,87 @@ public class DirGUI extends DirComponent implements ActionListener {
     String[] sortTypes = new String[]{"Normal", "Reverse", "Size", "Size/Re"};
     JComboBox sorter = new JComboBox(sortTypes);
     boolean dateEnabled = false;
+
+    public void initMouseListener() {
+        MouseListener mouseListener = new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                DirGUI.this.mouseClicked(e);
+            }
+
+            public void mousePressed(MouseEvent e) {
+                DirGUI.this.mousePressed(e);
+            }
+        };
+
+        table.addMouseListener(mouseListener);
+    }
+
+    public void mousePressed(MouseEvent e) {
+        if (JFtp.uiBlocked) {
+            return;
+        }
+
+        if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
+            int index = jl.getSelectedIndex() - 1;
+
+            if (index < -1) {
+                return;
+            }
+
+            String tgt = (String) jl.getSelectedValue().toString();
+
+            if (index < 0) {
+            } else if ((dirEntry == null) || (dirEntry.length < index) ||
+                    (dirEntry[index] == null)) {
+                return;
+            } else {
+                currentPopup = dirEntry[index];
+                popupMenu.show(e.getComponent(), e.getX(), e.getY());
+            }
+        }
+    }
+
+    public void mouseClicked(MouseEvent e) {
+        if (JFtp.uiBlocked) {
+            return;
+        }
+
+        TableUtils.copyTableSelectionsToJList(jl, table);
+
+        //System.out.println("DirEntryListener::");
+        if (e.getClickCount() == 2) {
+            //System.out.println("2xList selection: "+jl.getSelectedValue().toString());
+            int index = jl.getSelectedIndex() - 1;
+
+            // mousewheel bugfix, ui refresh bugfix
+            if (index < -1) {
+                return;
+            }
+
+            String tgt = (String) jl.getSelectedValue().toString();
+
+            //System.out.println("List selection: "+index);
+            if (index < 0) {
+                doChdir(path + tgt);
+            } else if ((dirEntry == null) || (dirEntry.length < index) ||
+                    (dirEntry[index] == null)) {
+                return;
+            } else if (dirEntry[index].isDirectory()) {
+                doChdir(path + tgt);
+            } else {
+                showContentWindow(path + dirEntry[index].toString(),
+                        dirEntry[index]);
+            }
+        }
+    }
+
+    public void doChdir(String path) {
+
+    }
+
+    public void showContentWindow(String url, DirEntry d) {
+
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

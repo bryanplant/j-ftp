@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2270f584-dcda-4134-9162-7a2aa5d4c7a4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/DirGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/DirGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/LocalDir.java" beforeDir="false" afterPath="$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/LocalDir.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/RemoteDir.java" beforeDir="false" afterPath="$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/RemoteDir.java" afterDir="false" />
     </list>
@@ -13,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.5026652">
       <split-first>
         <leaf>
           <file pinned="false" current-in-tab="false">
@@ -26,36 +27,32 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/RemoteDir.java">
+            <entry file="file://$PROJECT_DIR$/j-ftp/.gitignore">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-119">
-                  <caret line="88" column="41" selection-start-line="88" selection-start-column="41" selection-end-line="88" selection-end-column="41" />
+                <state>
+                  <caret column="6" selection-start-column="6" selection-end-column="6" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/j-ftp/.gitignore">
+            <entry file="file://$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/LocalDir.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret column="6" lean-forward="true" selection-start-column="6" selection-end-column="6" />
+                <state relative-caret-position="204">
+                  <caret line="223" column="8" selection-start-line="223" selection-start-column="8" selection-end-line="223" selection-end-column="8" />
+                  <folding>
+                    <element signature="e#33653#33654#0" expanded="true" />
+                    <element signature="e#33698#33699#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/LocalDir.java">
+            <entry file="file://$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/RemoteDir.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-136">
-                  <caret line="86" column="4" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
-                  <folding>
-                    <element signature="e#3530#3641#0" expanded="true" />
-                    <element signature="e#3640#3641#0" expanded="true" />
-                    <element signature="e#3680#3791#0" expanded="true" />
-                    <element signature="e#3790#3791#0" expanded="true" />
-                    <element signature="e#33653#33654#0" expanded="true" />
-                    <element signature="e#33698#33699#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="244">
+                  <caret line="234" column="65" selection-start-line="234" selection-start-column="65" selection-end-line="234" selection-end-column="65" />
                 </state>
               </provider>
             </entry>
@@ -67,10 +64,14 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/DirGUI.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="85">
-                  <caret line="38" selection-start-line="38" selection-end-line="38" />
+                <state relative-caret-position="331">
+                  <caret line="88" column="46" selection-start-line="88" selection-start-column="46" selection-end-line="88" selection-end-column="46" />
                   <folding>
                     <element signature="imports" expanded="true" />
+                    <element signature="e#2687#2688#0" expanded="true" />
+                    <element signature="e#2746#2747#0" expanded="true" />
+                    <element signature="e#2812#2813#0" expanded="true" />
+                    <element signature="e#2854#2855#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -94,9 +95,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/j-ftp/.gitignore" />
+        <option value="$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/LocalDir.java" />
         <option value="$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/RemoteDir.java" />
         <option value="$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/DirGUI.java" />
-        <option value="$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/LocalDir.java" />
       </list>
     </option>
   </component>
@@ -167,7 +168,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553830899944" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553831465508" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -217,12 +218,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1553830100859</updated>
-      <workItem from="1553830104173" duration="682000" />
+      <workItem from="1553830104173" duration="1358000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="682000" />
+    <option name="totallyTimeSpent" value="1358000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -233,7 +234,7 @@
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Capture Tool" />
       <window_info id="UI Designer" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
@@ -244,7 +245,7 @@
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -274,41 +275,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/RemoteDir.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-119">
-          <caret line="88" column="41" selection-start-line="88" selection-start-column="41" selection-end-line="88" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/j-ftp/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="6" lean-forward="true" selection-start-column="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/DirGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret column="6" selection-start-column="6" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/LocalDir.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
-          <caret line="86" column="4" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
+        <state relative-caret-position="204">
+          <caret line="223" column="8" selection-start-line="223" selection-start-column="8" selection-end-line="223" selection-end-column="8" />
           <folding>
-            <element signature="e#3530#3641#0" expanded="true" />
-            <element signature="e#3640#3641#0" expanded="true" />
-            <element signature="e#3680#3791#0" expanded="true" />
-            <element signature="e#3790#3791#0" expanded="true" />
             <element signature="e#33653#33654#0" expanded="true" />
             <element signature="e#33698#33699#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/RemoteDir.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="234" column="65" selection-start-line="234" selection-start-column="65" selection-end-line="234" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/j-ftp/src/java/net/sf/jftp/gui/base/DirGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="88" column="46" selection-start-line="88" selection-start-column="46" selection-end-line="88" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2687#2688#0" expanded="true" />
+            <element signature="e#2746#2747#0" expanded="true" />
+            <element signature="e#2812#2813#0" expanded="true" />
+            <element signature="e#2854#2855#0" expanded="true" />
           </folding>
         </state>
       </provider>
