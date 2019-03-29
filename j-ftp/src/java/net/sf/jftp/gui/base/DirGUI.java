@@ -218,19 +218,15 @@ public class DirGUI extends DirComponent implements ActionListener {
 
         TableUtils.copyTableSelectionsToJList(jl, table);
 
-        //System.out.println("DirEntryListener::");
         if (e.getClickCount() == 2) {
-            //System.out.println("2xList selection: "+jl.getSelectedValue().toString());
             int index = jl.getSelectedIndex() - 1;
 
-            // mousewheel bugfix, ui refresh bugfix
             if (index < -1) {
                 return;
             }
 
             String tgt = (String) jl.getSelectedValue().toString();
 
-            //System.out.println("List selection: "+index);
             if (index < 0) {
                 doChdir(path + tgt);
             } else if ((dirEntry == null) || (dirEntry.length < index) ||
