@@ -106,6 +106,7 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
         initButtons();
         initPanels(FlowLayout.RIGHT, "East", uploadButton);
         addButtons();
+        initMouseListener();
 
         sorter.addActionListener(this);
 
@@ -115,15 +116,7 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
         jl.setCellRenderer(new DirCellRenderer());
         jl.setVisibleRowCount(Settings.visibleFileRows);
 
-        initMouseListener();
-
         TableUtils.tryToEnableRowSorting(table);
-
-        if (Settings.IS_JAVA_1_6) {
-            //sorter.setVisible(false);
-            buttonPanel.remove(sorter);
-        }
-
         setVisible(true);
     }
 
@@ -161,6 +154,10 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
 
         buttonPanel.add(zipButton);
         buttonPanel.add(new JLabel("              "));
+
+        if (Settings.IS_JAVA_1_6) {
+            buttonPanel.remove(sorter);
+        }
     }
 
     public void doChdir(String path) {

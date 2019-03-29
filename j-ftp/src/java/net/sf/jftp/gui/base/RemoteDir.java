@@ -110,6 +110,7 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
         initButtons();
         initPanels(FlowLayout.LEFT, "West", downloadButton);
         addButtons();
+        initMouseListener();
 
         sorter.addActionListener(this);
 
@@ -120,15 +121,7 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
         jl.setDragEnabled(true);
         jl.setDropTarget(JFtp.statusP.jftp.dropTarget);
 
-        initMouseListener();
-
         TableUtils.tryToEnableRowSorting(table);
-
-        if (Settings.IS_JAVA_1_6) {
-            //sorter.setVisible(false);
-            buttonPanel.remove(sorter);
-        }
-
         setVisible(true);
     }
 
@@ -170,6 +163,10 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
         buttonPanel.add(list);
         buttonPanel.add(transferType);
         buttonPanel.add(sorter);
+
+        if (Settings.IS_JAVA_1_6) {
+            buttonPanel.remove(sorter);
+        }
     }
 
     @Override
