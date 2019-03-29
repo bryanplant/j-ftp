@@ -108,7 +108,6 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
         initMouseListener();
         initList();
 
-        TableUtils.tryToEnableRowSorting(table);
         setVisible(true);
     }
 

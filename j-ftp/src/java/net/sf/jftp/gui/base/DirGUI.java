@@ -36,12 +36,8 @@ public class DirGUI extends DirComponent implements ActionListener {
     HImageButton queueButton;
     HImageButton cdUpButton;
     HImageButton rnButton;
-    HImageButton list = new HImageButton(Settings.listImage, "list",
-            "Show remote listing...", this);
-    HImageButton transferType = new HImageButton(Settings.typeImage,
-            "type",
-            "Toggle transfer type...",
-            this);
+    HImageButton list;
+    HImageButton transferType;
 
     DirCanvas label = new DirCanvas(this);
     boolean pathChanged = true;
@@ -70,6 +66,14 @@ public class DirGUI extends DirComponent implements ActionListener {
     boolean dateEnabled = false;
 
     public void initButtons() {
+        list = new HImageButton(Settings.listImage, "list",
+                "Show remote listing...", this);
+
+        transferType = new HImageButton(Settings.typeImage,
+                "type",
+                "Toggle transfer type...",
+                this);
+
         rnButton = new HImageButton(Settings.textFileImage, rnString,
                 "Rename selected file or directory", this);
         rnButton.setToolTipText("Rename selected");
@@ -197,8 +201,6 @@ public class DirGUI extends DirComponent implements ActionListener {
             if (index < -1) {
                 return;
             }
-
-            String tgt = (String) jl.getSelectedValue().toString();
 
             if (index < 0) {
             } else if ((dirEntry == null) || (dirEntry.length < index) ||
