@@ -11,9 +11,7 @@ import net.sf.jftp.gui.framework.HImageButton;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class DirGUI extends DirComponent implements ActionListener {
     static final String deleteString = "rm";
@@ -129,6 +127,21 @@ public class DirGUI extends DirComponent implements ActionListener {
         buttonPanel.add(deleteButton);
         buttonPanel.add(cdUpButton);
         buttonPanel.add(new JLabel("  "));
+    }
+
+    public void initMouseListener() {
+        // add this because we need to fetch only doubleclicks
+        MouseListener mouseListener = new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                DirGUI.this.mousePressed(e);
+            }
+
+            public void mouseClicked(MouseEvent e) {
+                DirGUI.this.mouseClicked(e);
+            }
+        };
+
+        table.addMouseListener(mouseListener);
     }
 
     public void mousePressed(MouseEvent e) {

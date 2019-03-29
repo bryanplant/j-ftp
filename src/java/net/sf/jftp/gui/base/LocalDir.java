@@ -141,21 +141,10 @@ public class LocalDir extends DirGUI implements ListSelectionListener,
         jl.setCellRenderer(new DirCellRenderer());
         jl.setVisibleRowCount(Settings.visibleFileRows);
 
-        // add this becaus we need to fetch only doubleclicks
-        MouseListener mouseListener = new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                LocalDir.this.mousePressed(e);
-            }
-
-            public void mouseClicked(MouseEvent e) {
-                LocalDir.this.mouseClicked(e);
-            }
-        };
-
+        initMouseListener();
 
         jsp = new JScrollPane(table);
         table.getSelectionModel().addListSelectionListener(this);
-        table.addMouseListener(mouseListener);
 
         AdjustmentListener adjustmentListener = new AdjustmentListener() {
             public void adjustmentValueChanged(AdjustmentEvent e) {

@@ -138,20 +138,11 @@ public class RemoteDir extends DirGUI implements ListSelectionListener,
         jl.setDragEnabled(true);
         jl.setDropTarget(JFtp.statusP.jftp.dropTarget);
 
-        // add this becaus we need to fetch only doubleclicks
-        MouseListener mouseListener = new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                RemoteDir.this.mousePressed(e);
-            }
-
-            public void mouseClicked(MouseEvent e) {
-                RemoteDir.this.mouseClicked(e);
-            }
-        };
+        initMouseListener();
 
         jsp = new JScrollPane(table);
         table.getSelectionModel().addListSelectionListener(this);
-        table.addMouseListener(mouseListener);
+
 
         AdjustmentListener adjustmentListener = new AdjustmentListener() {
             public void adjustmentValueChanged(AdjustmentEvent e) {
